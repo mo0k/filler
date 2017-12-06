@@ -6,7 +6,7 @@
 /*   By: mo0ky <mo0ky@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/17 21:03:14 by mo0ky             #+#    #+#             */
-/*   Updated: 2017/11/23 23:19:02 by mo0ky            ###   ########.fr       */
+/*   Updated: 2017/11/23 23:59:07 by mo0ky            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,10 @@ int				set_piece(char **line, t_map *piece);
 int				get_number(char *ptr);
 void			place_piece(t_filler *data);
 
-void			clear(t_filler *data);
+t_coord			*get_tab_direction(int height, int width);
 void			print_coord(t_list *elem);
 void			del_coord(void *elem, size_t size);
+
+void			clear(t_filler *data);
 
 #endif

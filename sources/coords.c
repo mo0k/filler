@@ -6,13 +6,13 @@
 /*   By: mo0ky <mo0ky@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 23:27:55 by mo0ky             #+#    #+#             */
-/*   Updated: 2017/11/23 23:38:55 by mo0ky            ###   ########.fr       */
+/*   Updated: 2017/12/02 22:10:28 by mo0ky            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <filler.h>
 
-t_coord			init_coord(int x, int y)
+static *Ht_coord			init_coord(int x, int y)
 {
 	t_coord		new;
 

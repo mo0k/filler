@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_player.c                                       :+:      :+:    :+:   */
+/*   win.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mo0ky <mo0ky@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/16 21:53:58 by mo0ky             #+#    #+#             */
-/*   Updated: 2017/11/23 23:58:07 by mo0ky            ###   ########.fr       */
+/*   Created: 2017/09/26 00:10:46 by mo0ky             #+#    #+#             */
+/*   Updated: 2017/11/27 22:45:29 by mo0ky            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <filler.h>
+#ifndef WIN_H
+# define WIN_H
 
-int		set_player(char *ptr, char *addr_player)
-{
-	if (!addr_player || !ptr)
-		return (0);
-	if (*ptr == '1')
-		*addr_player = 'O';
-	else if (*ptr == '2')
-		*addr_player = 'X';
-	else
-		return (0);
-	ft_dprintf(2, "Player loaded(%c)\n", *addr_player);
-	return (1);
-}
+# include <win.h>
+# include <curses.h>
+# include <libft.h>
+
+typedef struct	s_win{
+	WINDOW		*window;
+	int			height;
+	int			width;
+}				t_win;
+
+int 		initialize_window(t_win *win, int height, int width);
+int			create_window(t_win *win, int x_start, int y_start, short color_pair);
+void		add_title(t_win *win, char *title, short color_pair);
+
+#endif
