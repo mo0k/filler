@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_player.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mo0ky <mo0ky@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jmoucade <jmoucade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 21:53:58 by mo0ky             #+#    #+#             */
-/*   Updated: 2017/11/23 23:58:07 by mo0ky            ###   ########.fr       */
+/*   Updated: 2017/12/06 14:57:25 by jmoucade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,5 @@ int		set_player(char *ptr, char *addr_player)
 		*addr_player = 'X';
 	else
 		return (0);
-	ft_dprintf(2, "Player loaded(%c)\n", *addr_player);
 	return (1);
 }

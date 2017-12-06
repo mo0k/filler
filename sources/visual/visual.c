@@ -3,28 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   visual.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mo0ky <mo0ky@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jmoucade <jmoucade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 23:44:25 by mo0ky             #+#    #+#             */
-/*   Updated: 2017/11/29 21:58:49 by mo0ky            ###   ########.fr       */
+/*   Updated: 2017/12/06 15:51:02 by jmoucade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include <visual.h>
 #include <win.h>
 #include <ncurses.h>
 #include <libft.h>
 
-enum e_pairs{
-	WIN = 1,
-	P1,
-	P2
-};
-
-void			init_visual()
+void				init_visual(void)
 {
-	int		y_max;
-	int		x_max;
+	int			y_max;
+	int			x_max;
+	int			tmp;
 
 	initscr();
 	curs_set(0);
@@ -35,8 +29,7 @@ void			init_visual()
 	init_pair(P1, COLOR_GREEN, COLOR_GREEN);
 	init_pair(P2, COLOR_RED, COLOR_RED);
 	getmaxyx(stdscr, y_max, x_max);
-
-	int tmp = x_max / 2 - 5;
+	tmp = x_max / 2 - 5;
 	mvprintw(0, tmp, "P1:");
 	attron(COLOR_PAIR(2));
 	mvprintw(0, tmp + 3, " ");
@@ -48,41 +41,10 @@ void			init_visual()
 	refresh();
 }
 
-void			update_screen(t_win *win, int y_start, int x_start, char *line)
+static int			get_number(char *ptr)
 {
-	char c;
-
-	if (!line || !win)
-		return ;
-	while (*line)
-	{
-		if ((c = (A_CHARTEXT & mvwinch(win->window, y_start, x_start))) == *line)
-			continue ;
-		else if (*line == 'O' || *line == 'o')
-		{
-			wattron(win->window, COLOR_PAIR(P1));
-			mvwaddch(win->window, y_start, x_start, *line);
-			wattroff(win->window, COLOR_PAIR(P1));
-		}
-		else if (*line == 'X' || *line == 'x')
-		{
-			wattron(win->window, COLOR_PAIR(P2));
-			mvwaddch(win->window, y_start, x_start, *line);
-			wattroff(win->window, COLOR_PAIR(P2));
-		}
-		else
-			mvwaddch(win->window, y_start, x_start, ' ');
-		++x_start;
-		++line;
-	
-	}
-	//sleep(1);
-}
-
-int				get_number(char *ptr)
-{
-	int		number;
-	int 	i;
+	int			number;
+	int			i;
 
 	if (!ptr)
 		return (-1);
@@ -97,28 +59,39 @@ int				get_number(char *ptr)
 	return (number);
 }
 
-void			visual(char **line)
+static int			init_map(char **line, t_win *win, int *y_max, int *x_max)
 {
-	t_win 	win;
-	int		y_max;
-	int		x_max;
-	char 	*ptr;
-	int 	i;
-	char *start;
-	i = -1;
-	getmaxyx(stdscr, y_max, x_max);
+	char		*ptr;
+
+	if (!win || !line)
+		return (0);
+	getmaxyx(stdscr, *y_max, *x_max);
 	ptr = *line;
 	ptr += 8;
-	if ((win.height = get_number(ptr)) < 0)
-		return ;
-	if ((win.width = get_number(ptr + ft_nbrlen(win.height) + 1)) < 0)
-		return ;
-	if (win.height > y_max - 1 || win.width > x_max)
-		return ;
+	if ((win->height = get_number(ptr)) < 0)
+		return (0);
+	if ((win->width = get_number(ptr + ft_nbrlen(win->height) + 1)) < 0)
+		return (0);
+	if (win->height > *y_max - 1 || win->width > *x_max)
+		return (0);
 	(line && *line) ? ft_memdel((void*)line) : 0;
 	get_next_line(0, line);
 	(line && *line) ? ft_memdel((void*)line) : 0;
-	if (!initialize_window(&win, win.height + 2, win.width + 2))
+	if (!initialize_window(win, win->height + 2, win->width + 2))
+		return (0);
+	return (1);
+}
+
+void				visual(char **line)
+{
+	t_win		win;
+	int			y_max;
+	int			x_max;
+	int			i;
+	char		*start;
+
+	i = -1;
+	if (!init_map(line, &win, &y_max, &x_max))
 		return ;
 	if (!create_window(&win, x_max / 2 - 1 - win.width / 2, 1, COLOR_PAIR(WIN)))
 		return ;
@@ -134,26 +107,21 @@ void			visual(char **line)
 			(line && *line) ? ft_memdel((void*)line) : 0;
 		}
 	}
-			wrefresh(win.window);
-			sleep(1);
+	wrefresh(win.window);
+	sleep(1);
 }
 
-int 	main(void)
+int					main(void)
 {
-	char *line;
+	char		*line;
 
 	line = NULL;
 	init_visual();
 	sleep(1);
 	while (get_next_line(0, &line) > 0)
 	{
-		//mvprintw(0, 0, "line:%s", line);
-		//refresh();
-		//sleep(2);
 		if (ft_strstr(line, "Plateau "))
-		{
 			visual(&line);
-		}
 		(line) ? ft_memdel((void*)&line) : 0;
 	}
 	sleep(5);

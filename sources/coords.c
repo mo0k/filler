@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   coords.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mo0ky <mo0ky@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jmoucade <jmoucade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/23 23:27:55 by mo0ky             #+#    #+#             */
-/*   Updated: 2017/12/02 22:10:28 by mo0ky            ###   ########.fr       */
+/*   Updated: 2017/12/06 14:55:18 by jmoucade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <filler.h>
 
-static *Ht_coord			init_coord(int x, int y)
+static t_coord	init_coord(int x, int y)
 {
 	t_coord		new;
 
@@ -39,12 +39,7 @@ t_coord			*get_tab_direction(int height, int width)
 	return (direction);
 }
 
-void	print_coord(t_list *elem)
-{
-	ft_dprintf(2, "%d %d\n", ((t_coord*)(elem->content))->y, ((t_coord*)(elem->content))->x);
-}
-
-void	del_coord(void *elem, size_t size)
+void			del_coord(void *elem, size_t size)
 {
 	(void)size;
 	if (!elem)

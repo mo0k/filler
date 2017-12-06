@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   filler.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mo0ky <mo0ky@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jmoucade <jmoucade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 21:53:58 by mo0ky             #+#    #+#             */
-/*   Updated: 2017/11/23 23:29:00 by mo0ky            ###   ########.fr       */
+/*   Updated: 2017/12/06 14:56:00 by jmoucade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,12 @@ void			exit_prog(t_filler *data, char **line, int exit_flag)
 {
 	clear(data);
 	(line && *line) ? ft_memdel((void*)line) : 0;
-	//close(g_fd);
 	exit(exit_flag);
 }
 
-
-int		main(void)
+int				main(void)
 {
 	char		*line;
-	//int			fd;
 	t_filler	data;
 	int			ret;
 
@@ -43,8 +40,6 @@ int		main(void)
 	data.piece.map = NULL;
 	data.coords = NULL;
 	data.direction = NULL;
-	//if ((g_fd = open("debug", O_WRONLY | O_TRUNC | O_CREAT, 0600)) == -1)
-	//	return (0);
 	while ((ret = get_next_line(0, &line)) > 0)
 	{
 		if (ft_strstr(line, "$$$ exec p") &&
@@ -59,6 +54,5 @@ int		main(void)
 										exit_prog(&data, &line, EXIT_FAILURE);
 		(line) ? ft_memdel((void*)&line) : 0;
 	}
-	//while(1){};
 	exit_prog(&data, &line, EXIT_SUCCESS);
 }

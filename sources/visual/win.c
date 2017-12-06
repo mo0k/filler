@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   win.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mo0ky <mo0ky@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jmoucade <jmoucade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/24 22:20:44 by mo0ky             #+#    #+#             */
-/*   Updated: 2017/11/27 22:41:45 by mo0ky            ###   ########.fr       */
+/*   Updated: 2017/12/06 15:20:40 by jmoucade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <win.h>
-
 
 void	add_title(t_win *win, char *title, short color_pair)
 {
@@ -23,7 +22,7 @@ void	add_title(t_win *win, char *title, short color_pair)
 	wattroff(win->window, color_pair);
 }
 
-int 	initialize_window(t_win *win, int height, int width)
+int		initialize_window(t_win *win, int height, int width)
 {
 	if (!win)
 		return (0);

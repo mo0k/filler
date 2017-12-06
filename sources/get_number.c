@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_number.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mo0ky <mo0ky@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jmoucade <jmoucade@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/16 21:53:58 by mo0ky             #+#    #+#             */
-/*   Updated: 2017/11/23 23:29:05 by mo0ky            ###   ########.fr       */
+/*   Updated: 2017/12/06 14:56:19 by jmoucade         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int				get_number(char *ptr)
 {
 	int		number;
-	int 	i;
+	int		i;
 
 	if (!ptr)
 		return (-1);
